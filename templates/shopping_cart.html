@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{{ top_menu(selection=2)}}
+{% endblock navbar %}
+
+{% block content %}
+<ul class="list">
+{% for dish in shopping_cart.dishes %}
+<li>
+    <details close>
+    <summary>
+        <span class="title">{{ dish.dish.name }} x {{ dish.amount }}</span> 
+        <span class="deadline">{{"%0.2f грн"|format(dish.price|float) }}</span>
+
+    </summary>
+    
+    </details>
+    <form method="POST" action="">
+        <input type="hidden" name="dish_id" value="{{ dish.dish.id }}">
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+</li>
+{% endfor %}
+</ul>
+{{"%0.2f грн"|format(shopping_cart.price|float)}}
+</div>
+{% endblock content %}

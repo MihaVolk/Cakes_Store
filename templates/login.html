@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{{ top_menu(selection==2) }}
+{% endblock navbar %}
+
+{% block content %}
+<form class="form-signin" method="POST" action="">
+    {{ form.csrf_token }}
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputUsername" class="sr-only">Username</label>
+    {{ form.username(class_="form-control", placeholder="Username", id="inputUsername")}}
+    <label for="inputPassword" class="sr-only">Password</label>
+    {{ form.password(class_="form-control", placeholder="Password", id="inputPassword")}}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
+    </form>
+
+    {% for field, error in form.errors.items() %}
+    <div class="alert alert-danger" role="alert">
+        {{field}}: {{error}}
+      </div>
+    {% endfor%}
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+    {% endfor%}
+    {% endwith %}
+{% endblock content %}
